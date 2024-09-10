@@ -1,7 +1,7 @@
 package com.br.luizortizdev.groceryStore.service;
 
 import com.br.luizortizdev.groceryStore.client.ClientOrder;
-import com.br.luizortizdev.groceryStore.client.ProductsResponse;
+import com.br.luizortizdev.groceryStore.client.response.ProductsResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

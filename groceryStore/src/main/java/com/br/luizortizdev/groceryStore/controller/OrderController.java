@@ -1,9 +1,7 @@
 package com.br.luizortizdev.groceryStore.controller;
 
-import com.br.luizortizdev.groceryStore.client.ClientOrder;
-import com.br.luizortizdev.groceryStore.client.ProductsResponse;
+import com.br.luizortizdev.groceryStore.client.response.ProductsResponse;
 import com.br.luizortizdev.groceryStore.service.OrderService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +24,7 @@ public class OrderController {
         return orderService.getProducts();
     }
 
-    @GetMapping(name = "/{id}")
+    @GetMapping(name = "/products/{id}")
     public List<ProductsResponse> getProductById(@PathVariable String id){
         return orderService.getProductById(id);
     }
