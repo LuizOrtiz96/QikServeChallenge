@@ -1,17 +1,17 @@
 package com.br.luizortizdev.groceryStore;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
-import org.junit.ClassRule;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class WireMockTest {
-    @ClassRule
-    public static WireMockClassRule wireMockRule = new WireMockClassRule(8080);
+    /*@Autowired
+    private WiremockClient wiremockClient;
 
     @Test
-    public void testWireMock() {
-        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/test"))
-                .willReturn(WireMock.aResponse().withBody("Hello World!")));
-    }
+    public void testGetItems() {
+        List<ordem> items = wiremockClient.getItems();
+        assertNotNull(items);
+    }*/
 }
