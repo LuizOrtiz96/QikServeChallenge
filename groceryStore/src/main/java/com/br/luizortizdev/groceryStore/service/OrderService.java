@@ -64,7 +64,7 @@ public class OrderService {
     private int applyPromotions(OrderItem order) {
         List<Promotion> promotions = order.getProduct().getPromotions();
         if (promotions == null || promotions.isEmpty()) {
-            return 0; // Sem promoções
+            return 0;
         }
         int discount = 0;
         for (Promotion promotion : promotions) {
@@ -79,7 +79,6 @@ public class OrderService {
                     discount += applyFlatPercentPromotion(order, promotion);
                     break;
                 default:
-                    // Nenhuma promoção aplicável
             }
         }
         order.setDiscount(discount);
@@ -88,30 +87,27 @@ public class OrderService {
 
     private int applyBuyXGetYFreePromotion(OrderItem order, Promotion promotion) {
         if (promotion.getRequiredQty() <= 0) {
-            return 0; // Se for zero ou negativo, não aplica a promoção
+            return 0;
         }
 
-        // Compre X ganhe Y gratuito
         int sets = order.getQuantity() / promotion.getRequiredQty();
         int freeItems = sets * promotion.getFreeQty();
         return freeItems * order.getProduct().getPrice();
     }
 
     private int applyQtyBasedPriceOverridePromotion(OrderItem order, Promotion promotion) {
-        // Override de preço baseado na quantidade
         if (order.getQuantity() >= promotion.getRequiredQty()) {
             int sets = order.getQuantity() / promotion.getRequiredQty();
             int remainingItems = order.getQuantity() % promotion.getRequiredQty();
-            int priceForSets = sets * promotion.getPrice(); // Preço ajustado para os conjuntos
-            int priceForRemainingItems = remainingItems * order.getProduct().getPrice(); // Preço normal para os restantes
+            int priceForSets = sets * promotion.getPrice();
+            int priceForRemainingItems = remainingItems * order.getProduct().getPrice();
             int originalPrice = order.getProduct().getPrice() * order.getQuantity();
-            return originalPrice - (priceForSets + priceForRemainingItems); // Retorna o desconto
+            return originalPrice - (priceForSets + priceForRemainingItems);
         }
         return 0;
     }
 
     private int applyFlatPercentPromotion(OrderItem item, Promotion promotion) {
-        // Desconto percentual simples
         return (int) ((item.getProduct().getPrice() * item.getQuantity()) * (promotion.getAmount() / 100.0));
     }
 }
